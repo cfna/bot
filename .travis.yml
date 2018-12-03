@@ -1,0 +1,14 @@
+# nodejs version will be picked up from .nvmrc
+language: node_js
+
+sudo: false
+
+cache:
+  directories:
+    - node_modules
+
+before_script:
+- yarn link
+
+script:
+- yarn test
