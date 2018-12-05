@@ -18,16 +18,20 @@
     "compile": "tsc",
     "pretest": "yarn build",
     "precommit": "lint-staged",
-    "test": "jest"
+    "test": "jest",
+    "start:dev": "ts-node src/run.ts"
   },
   "dependencies": {
+    "jimp": "^0.6.0",
     "json-beautify": "^1.0.1",
     "lodash": "^4.17.11",
     "reflect-metadata": "^0.1.12",
+    "robotjs": "^0.5.1",
     "winston": "^3.1.0"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
+    "@types/jimp": "^0.2.28",
     "@types/lodash": "^4.14.118",
     "@types/node": "^10.12.12",
     "gulp": "^3.9.1",
