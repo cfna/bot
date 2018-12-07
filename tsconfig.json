@@ -18,9 +18,10 @@
     "emitDecoratorMetadata": true,
     "preserveConstEnums": true,
     "downlevelIteration": true,
+    "checkJs": false
   },
   "include": [
-    "./src/**/*.ts",
+    "./src/**/*.{ts, js}",
     "./typings.d.ts"
   ],
   "exclude": [

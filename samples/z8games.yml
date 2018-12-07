@@ -1,0 +1,40 @@
+name: z8games
+repeat: always
+actions:
+- type: mouse
+  action: move
+  location:
+    x: 1032
+    y: 219
+  smooth: true
+- type: mouse
+  action: move
+  location:
+    x: 1038
+    y: 309
+  smooth: true
+- type: mouse
+  action: click
+  button: left
+  location:
+    x: 1038
+    y: 309
+- type: mouse
+  action: click
+  button: left
+  location:
+    x: 445
+    y: 550
+- type: keyboard
+  action: text
+  text: ez.snipes-
+- type: keyboard
+  action: key
+  key: enter
+- type: mouse
+  action: click
+  location:
+    x: 673
+    y: 646
+  button: left
+  click: single

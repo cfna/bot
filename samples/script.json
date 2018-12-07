@@ -1,0 +1,34 @@
+{
+  "name": "test-script",
+  "repeat": "always",
+  "actions": [
+    {
+      "type": "mouse",
+      "action": "click",
+      "button": "left",
+      "location": {
+        "x": 500,
+        "y": 600
+      }
+    },
+    {
+      "type": "mouse",
+      "action": "move",
+      "location": {
+        "x": 300,
+        "y": 400
+      },
+      "smooth": true
+    },
+    {
+      "type": "keyboard",
+      "action": "text",
+      "text": "test"
+    },
+    {
+      "type": "keyboard",
+      "action": "key",
+      "key": "{Enter}"
+    }
+  ]
+}
