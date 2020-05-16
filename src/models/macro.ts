@@ -12,14 +12,14 @@ export type Key = 'backspace' | 'delete' | 'enter' | 'tab' | 'escape' | 'up' | '
                   'home' | 'end' | 'pageup' | 'pagedown' | 'alt' | 'shift' | 'control' | 'printscreen' | 'space' |
                   'shift' | 'right_shift';
 
-export interface Script {
-  readonly name: string;
-  readonly repeat: RepeatAction;
-  readonly actions: Action[];
+export interface Macro {
+  name: string;
+  repeat: RepeatAction;
+  actions: Action[];
 }
 
 export abstract class Action {
-  readonly type: ActionType;
+  type?: ActionType;
 }
 
 export interface MouseAction extends Action {
