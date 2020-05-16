@@ -1,5 +1,5 @@
 import { MouseController, KeyboardController } from './controllers'
-import { MacroExecutor, MacroExecutorOptions } from './utils'
+import { MacroExecutor, MacroExecutorOptions } from './macro-executor'
 import { Macro } from './models'
 
 export interface MacroExecutionOptions {}
