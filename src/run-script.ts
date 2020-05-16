@@ -1,7 +1,7 @@
 import yargs from 'yargs';
 import path from 'path';
 import { ScriptLoader } from './utils';
-import { CFBot } from '.';
+import { MacroController } from '.'
 
 const argv = yargs.option('script', {
   alias: 's',
@@ -13,12 +13,12 @@ if(!argv.script) {
 }
 
 async function main() {
-  const bot = new CFBot();
+  const macroController = new MacroController()
   const scriptLoader = new ScriptLoader();
-  const targetPath = path.isAbsolute(argv.script) ? argv.script : path.join(process.cwd(), argv.script);
+  const targetPath = path.isAbsolute(argv.script as string) ? argv.script as string : path.join(process.cwd(), argv.script as string);
   const obj = await scriptLoader.load(targetPath);
   console.log(obj);
-  bot.run(obj);
+  macroController.executeMacro(obj);
 }
 
 main();

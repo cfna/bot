@@ -1,10 +1,9 @@
-import { CFBot, ScreenController } from '.';
+import { ScreenController } from '.';
 import robot from 'robotjs';
 import { createLogger, Logger } from './utils';
 
 function run(): void {
-  const bot = new CFBot();
-  const sc = (bot.getController('screen') as ScreenController);
+  const sc = new ScreenController()
   sc.printScreenInfo();
   sc.capture(0, 0, 800, 600);
 }
