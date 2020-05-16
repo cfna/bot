@@ -3,15 +3,9 @@ import { Logger, createLogger, saveTemporary } from '../utils';
 
 export class ScreenController {
 
-  public static getInstance(): ScreenController {
-    return this.singleton;
-  }
-
-  private static readonly singleton = new ScreenController();
-
   private readonly logger: Logger;
 
-  private constructor() {
+  constructor() {
     this.logger = createLogger();
     this.logger.info('ScreenController instance created!');
   }

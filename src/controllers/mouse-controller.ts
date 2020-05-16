@@ -4,15 +4,9 @@ import { MouseCoordinates, TargetLocation, MouseButton, MouseClick } from '../mo
 
 export class MouseController {
 
-  public static getInstance(): MouseController {
-    return this.singleton;
-  }
-
-  private static readonly singleton = new MouseController();
-
   private readonly logger: Logger;
 
-  private constructor() {
+  constructor() {
     this.logger = createLogger();
     this.logger.info('MouseController instance created!');
   }
