@@ -18,7 +18,6 @@
     "clean": "rimraf dist",
     "compile": "tsc",
     "pretest": "yarn build",
-    "precommit": "lint-staged",
     "test": "jest",
     "run:script": "ts-node src/run-script.ts --script --",
     "run:debug": "ts-node src/run.ts"
