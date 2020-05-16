@@ -12,8 +12,6 @@ if (!argv.macro) {
   process.exit(1)
 }
 
-console.log(argv)
-
 async function run() {
   const macroController = new MacroController()
   const scriptLoader = new ScriptLoader()
