@@ -12,6 +12,9 @@
     "url": "https://github.com/cfna/afk-bot"
   },
   "private": true,
+  "bin": {
+    "cf-macro": "bin/cli.js"
+  },
   "scripts": {
     "prebuild": "yarn clean",
     "build": "yarn compile",
@@ -19,7 +22,7 @@
     "compile": "tsc",
     "pretest": "yarn build",
     "test": "jest",
-    "run:script": "ts-node src/run-script.ts --script --",
+    "run:macro": "node bin/cli.js",
     "run:debug": "ts-node src/run.ts"
   },
   "dependencies": {
