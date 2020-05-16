@@ -26,37 +26,27 @@
   "dependencies": {
     "jimp": "^0.11.0",
     "js-yaml": "^3.13.1",
-    "json-beautify": "^1.0.1",
+    "json-beautify": "^1.1.1",
     "lodash": "^4.17.15",
-    "prettier-tslint": "^0.4.0",
     "reflect-metadata": "^0.1.13",
     "robotjs": "^0.6.0",
-    "winston": "^3.1.0",
-    "yargs": "^12.0.5"
+    "winston": "^3.2.1",
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
-    "@types/jest": "^23.3.10",
-    "@types/js-yaml": "^3.11.2",
-    "@types/lodash": "^4.14.118",
-    "@types/node": "^10.12.12",
-    "@types/yargs": "^12.0.1",
-    "jest": "^23.6.0",
-    "lint-staged": "^8.1.0",
-    "prettier": "^1.15.3",
-    "release-it": "^8.2.0",
-    "rimraf": "^2.6.2",
-    "ts-jest": "^23.10.5",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "tslint-config-airbnb": "^5.11.1",
-    "tslint-config-prettier": "^1.17.0",
-    "typescript": "^3.2.1"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,js}": [
-      "yarn lint",
-      "prettier --parser typescript --write",
-      "git add"
-    ]
+    "@types/jest": "^25.2.2",
+    "@types/js-yaml": "^3.12.4",
+    "@types/lodash": "^4.14.151",
+    "@types/node": "^14.0.1",
+    "@types/yargs": "^15.0.5",
+    "jest": "^25.5.4",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "release-it": "^13.6.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.0.0",
+    "ts-node": "^8.10.1",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.2"
   }
 }
