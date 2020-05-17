@@ -12,6 +12,10 @@
     "url": "https://github.com/cfna/macro-controller"
   },
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "bin": {
     "cf-macro": "bin/cli.js"
   },
