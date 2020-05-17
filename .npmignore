@@ -6,7 +6,6 @@ jest.config.js
 typings.d.ts
 examples/
 tests/
-bin/
 *.log
 .docker-manifestrc
 .editorconfig

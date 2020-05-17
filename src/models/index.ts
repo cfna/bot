@@ -1,2 +1,2 @@
 export * from './mouse-coordinates';
-export * from './script';
+export * from './macro';

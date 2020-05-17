@@ -1,17 +1,34 @@
-import { CFBot } from '../';
-import { Logger, createLogger } from '.';
-import { Script, Action, MouseAction, KeyboardAction, TargetLocation, MouseButton, MouseClick, Key } from '../models';
+import { MouseController, KeyboardController } from './controllers'
+import { Logger, createLogger } from './utils'
+import {
+  Macro,
+  Action,
+  MouseAction,
+  KeyboardAction,
+  TargetLocation,
+  MouseButton,
+  MouseClick,
+  Key
+} from './models'
 
-export class ScriptRunner {
+export interface MacroExecutorOptions {
+  mouseController: MouseController
+  keyboardController: KeyboardController
+}
+
+export class MacroExecutor {
 
   private readonly logger: Logger;
+  private readonly mouseController: MouseController
+  private readonly keyboardController: KeyboardController
 
-  constructor(private readonly bot: CFBot) {
+  constructor(options: MacroExecutorOptions) {
     this.logger = createLogger();
-    this.bot.getController('keyboard');
+    this.mouseController = options.mouseController
+    this.keyboardController = options.keyboardController
   }
 
-  public async run(script: Script) {
+  public async run(script: Macro) {
     this.logger.info(`Running Script: ${script.name}`);
     await script.actions.map(async (action) => this.processAction(action));
   }
@@ -19,6 +36,11 @@ export class ScriptRunner {
   private async processAction<T extends Action = MouseAction | KeyboardAction>(action: T) {
     this.logger.info(`Processing Action:`);
     this.logger.info(JSON.stringify(action));
+
+    if(!action.type) {
+      this.logger.warn('Missing type identifier for Action. Skipping')
+      return
+    }
 
     if(action.type === 'keyboard') {
       this.logger.info('=> Keyboard Action found!');
@@ -49,20 +71,24 @@ export class ScriptRunner {
     }
   }
 
-  private handleMouseClick(location: TargetLocation, button: MouseButton = 'left', clickType: MouseClick = 'single') {
-    this.bot.mouse().click(location, button, clickType);
+  private handleMouseClick(location: TargetLocation, button: MouseButton = 'left', clickType: MouseClick = 'single', smooth: boolean = true) {
+    this.logger.info(`handleMouseClick(): location: ${location} button: ${button} clickType: ${clickType}`)
+    this.mouseController.click(location, button, clickType, smooth);
   }
 
   private handleMouseMove(location: TargetLocation, smooth?: boolean) {
-    this.bot.mouse().move(location, smooth);
+    this.logger.info(`handleMouseMove(): location: ${location} smooth: ${smooth}`)
+    this.mouseController.move(location, smooth);
   }
 
   private handleKeyPress(key: Key) {
-    this.bot.keyboard().pressKey(key);
+    this.logger.info(`handleKeyPress(): key: ${key}`)
+    this.keyboardController.pressKey(key);
   }
 
   private handleTypeText(text: string) {
-    this.bot.keyboard().type(text);
+    this.logger.info(`handleTypeText(): text: ${text}`)
+    this.keyboardController.type(text);
   }
 
 }

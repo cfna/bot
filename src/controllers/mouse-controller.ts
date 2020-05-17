@@ -4,17 +4,11 @@ import { MouseCoordinates, TargetLocation, MouseButton, MouseClick } from '../mo
 
 export class MouseController {
 
-  public static getInstance(): MouseController {
-    return this.singleton;
-  }
-
-  private static readonly singleton = new MouseController();
-
   private readonly logger: Logger;
 
-  private constructor() {
+  constructor() {
     this.logger = createLogger();
-    this.logger.info('MouseController instance created!');
+    this.logger.info('MouseController initialized!');
   }
 
   public moveAround(speed: number = 2): void {
@@ -45,8 +39,8 @@ export class MouseController {
     }
   }
 
-  public click(location: TargetLocation, button: MouseButton, clickType: MouseClick) {
-    this.move(location);
+  public click(location: TargetLocation, button: MouseButton, clickType: MouseClick, smooth: boolean) {
+    this.move(location, smooth);
     robot.mouseClick(button, clickType === 'double');
   }
 }

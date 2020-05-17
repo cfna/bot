@@ -1,31 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es2018",
     "module": "commonjs",
     "strict": true,
-    "declaration": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "declaration": true,
     "moduleResolution": "node",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "lib": [
-      "es5", "es6", "dom"
-    ],
+    "outDir": "dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "preserveConstEnums": true,
-    "downlevelIteration": true,
-    "checkJs": false
-  },
-  "include": [
-    "./src/**/*.{ts, js}",
-    "./typings.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+    "checkJs": false,
+    "rootDir": "src"
+  }
 }
