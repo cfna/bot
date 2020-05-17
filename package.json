@@ -1,5 +1,5 @@
 {
-  "name": "@cfna/macro-controller",
+  "name": "@cfwest/macro-controller",
   "description": "POC/DEV: A custom macro execution controller.",
   "version": "0.0.1",
   "license": "MIT",
