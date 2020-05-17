@@ -1,6 +1,6 @@
 {
-  "name": "@cfna/afk-bot",
-  "description": "Proof of concept for writing an AFK-Bot for CrossFire",
+  "name": "@cfna/macro-controller",
+  "description": "POC/DEV: A custom macro execution controller.",
   "version": "0.0.1",
   "license": "MIT",
   "author": {
@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cfna/afk-bot"
+    "url": "https://github.com/cfna/macro-controller"
   },
-  "private": true,
+  "private": false,
   "bin": {
     "cf-macro": "bin/cli.js"
   },
