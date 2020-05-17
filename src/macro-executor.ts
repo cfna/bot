@@ -71,19 +71,23 @@ export class MacroExecutor {
     }
   }
 
-  private handleMouseClick(location: TargetLocation, button: MouseButton = 'left', clickType: MouseClick = 'single') {
-    this.mouseController.click(location, button, clickType);
+  private handleMouseClick(location: TargetLocation, button: MouseButton = 'left', clickType: MouseClick = 'single', smooth: boolean = true) {
+    this.logger.info(`handleMouseClick(): location: ${location} button: ${button} clickType: ${clickType}`)
+    this.mouseController.click(location, button, clickType, smooth);
   }
 
   private handleMouseMove(location: TargetLocation, smooth?: boolean) {
+    this.logger.info(`handleMouseMove(): location: ${location} smooth: ${smooth}`)
     this.mouseController.move(location, smooth);
   }
 
   private handleKeyPress(key: Key) {
+    this.logger.info(`handleKeyPress(): key: ${key}`)
     this.keyboardController.pressKey(key);
   }
 
   private handleTypeText(text: string) {
+    this.logger.info(`handleTypeText(): text: ${text}`)
     this.keyboardController.type(text);
   }
 
