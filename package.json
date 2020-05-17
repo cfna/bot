@@ -1,7 +1,7 @@
 {
   "name": "@cfna/macro-controller",
   "description": "POC/DEV: A custom macro execution controller.",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "license": "MIT",
   "author": {
     "name": "Patrick Jung",
@@ -24,7 +24,9 @@
     "test": "jest",
     "prerun:macro": "yarn build",
     "run:macro": "node bin/cli.js",
-    "run:debug": "ts-node src/run.ts"
+    "run:debug": "ts-node src/run.ts",
+    "prerelease": "yarn build",
+    "release": "release-it"
   },
   "dependencies": {
     "jimp": "^0.11.0",
