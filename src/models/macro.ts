@@ -8,6 +8,8 @@ export type KeyboardActionType = 'text' | 'key'
 export type TargetLocation = { x: number, y: number }
 export type MouseButton = 'left' | 'middle' | 'right'
 export type MouseClick = 'single' | 'double'
+
+// Important: Adding more supported keys also requires updating the validation check in [MacroValidationHelper]
 export type Key = 'backspace' | 'delete' | 'enter' | 'tab' | 'escape' | 'up' | 'down' | 'left' | 'right' |
                   'home' | 'end' | 'pageup' | 'pagedown' | 'alt' | 'shift' | 'control' | 'printscreen' | 'space' |
                   'shift' | 'right_shift'

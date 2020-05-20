@@ -1,6 +1,7 @@
 import { MouseController, KeyboardController } from './controllers'
 import { MacroExecutor, MacroExecutorOptions } from './macro-executor'
 import { Macro } from './models'
+import { MacroValidationHelper } from './internal'
 
 export type CancelCallback = () => boolean
 
@@ -27,6 +28,7 @@ export class MacroController {
     return {
       keyboardController: new KeyboardController(),
       mouseController: new MouseController(),
+      macroValidationHelper: new MacroValidationHelper()
     }
   }
 
