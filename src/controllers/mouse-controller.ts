@@ -8,7 +8,7 @@ export class MouseController {
 
   constructor() {
     this.logger = createLogger()
-    this.logger.info('MouseController initialized!')
+    this.logger.debug('MouseController initialized!')
   }
 
   public moveAround(speed: number = 2): void {

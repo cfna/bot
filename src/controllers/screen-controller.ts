@@ -7,7 +7,7 @@ export class ScreenController {
 
   constructor() {
     this.logger = createLogger()
-    this.logger.info('ScreenController instance created!')
+    this.logger.debug('ScreenController instance created!')
   }
 
   public printScreenInfo(): void {

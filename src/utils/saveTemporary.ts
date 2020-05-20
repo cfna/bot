@@ -19,7 +19,7 @@ const defaultCallback = (name: string, error?: any) => {
   if(error) {
     logger.error(error)
   }
-  logger.info(`=> Saving to '${name}' done`)
+  logger.debug(`=> Saving to '${name}' done`)
 }
 
 async function ensureTmpDir() {
@@ -38,7 +38,7 @@ export async function saveTemporary(fileName: string, data: any, opts: SaveOptio
   await ensureTmpDir()
   const targetFile = opts.prefix ? appendPrefix(fileName) : fileName
   const target = path.join(tmpDir, targetFile)
-  logger.info(`Saving Temporary File to: ${target}`)
+  logger.debug(`Saving Temporary File to: ${target}`)
   // await screenCaptureToFile(target);
   const ws: WriteStream = fs.createWriteStream(target)
   await ws.write(data, (err) => {

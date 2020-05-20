@@ -8,7 +8,7 @@ export class KeyboardController {
 
   constructor() {
     this.logger = createLogger()
-    this.logger.info('KeyboardController initialized!')
+    this.logger.debug('KeyboardController initialized!')
   }
 
   public type(text: string) {
