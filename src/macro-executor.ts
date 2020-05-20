@@ -12,10 +12,12 @@ import {
   RepeatAction
 } from './models'
 import { CancelCallback } from './macro-controller';
+import { MacroValidationHelper } from './internal';
 
 export interface MacroExecutorOptions {
   mouseController: MouseController
   keyboardController: KeyboardController
+  macroValidationHelper: MacroValidationHelper
 }
 
 export class MacroExecutor {
@@ -23,9 +25,11 @@ export class MacroExecutor {
   private readonly logger: Logger;
   private readonly mouseController: MouseController
   private readonly keyboardController: KeyboardController
+  private readonly macroValidationHelper: MacroValidationHelper
 
   constructor(options: MacroExecutorOptions) {
     this.logger = createLogger();
+    this.macroValidationHelper = options.macroValidationHelper
     this.mouseController = options.mouseController
     this.keyboardController = options.keyboardController
   }
@@ -90,8 +94,8 @@ export class MacroExecutor {
   private async processAction<T extends Action = MouseAction | KeyboardAction>(action: T) {
     this.logger.debug(`Processing Action: ${JSON.stringify(action)}`)
 
-    if (!action.type) {
-      this.logger.warn('Missing type identifier for Action. Skipping')
+    if (!this.macroValidationHelper.isValidActionType(action.type)) {
+      this.logger.warn('Missing or invalid type identifier specified for Action. Skipping execution.')
       return
     }
 
@@ -109,6 +113,19 @@ export class MacroExecutor {
   }
 
   private handleMouseAction(action: MouseAction) {
+    const isValidLocation = this.macroValidationHelper.isValidLocation(action.location)
+    const isValidMouseActionType = this.macroValidationHelper.isValidMouseActionType(action.action)
+    
+    if (!isValidLocation) {
+      this.logger.warn('[MouseAction] Missing or invalid location specified. Skipping this step...')
+      return
+    }
+
+    if (!isValidMouseActionType) {
+      this.logger.warn('[MouseAction] Missing or invalid MouseActionType specified. Skipping this step...')
+      return
+    }
+
     if (action.action === 'click' && action.location) {
       this.handleMouseClick(action.location, action.button, action.click)
     } else if (action.action === 'move' && action.location) {
@@ -117,9 +134,30 @@ export class MacroExecutor {
   }
 
   private handleKeyboardAction(action: KeyboardAction) {
+    const isValidKeyboardActionType = this.macroValidationHelper.isValidKeyboardActionType(action.action)
+
+    if (!isValidKeyboardActionType) {
+      this.logger.warn('[KeyboardAction] Missing or invalid KeyboardActionType specified. Skipping this step...')
+      return
+    }
+
     if (action.action === 'key' && action.key) {
+      const isValidKeyboardKey = this.macroValidationHelper.isValidKeyboardKey(action.key)
+
+      if (!isValidKeyboardKey) {
+        this.logger.warn('[KeyboardAction] Missing or invalid Key specified. Skipping this step...')
+        return
+      }
+
       this.handleKeyPress(action.key)
     } else if (action.action === 'text' && action.text) {
+      const isValidText = this.macroValidationHelper.isValidText(action.text)
+
+      if (!isValidText) {
+        this.logger.warn('[KeyboardAction] Missing or invalid Text specified. Skipping this step...')
+        return
+      }
+
       this.handleTypeText(action.text)
     }
   }
