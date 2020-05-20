@@ -8,7 +8,8 @@ import {
   TargetLocation,
   MouseButton,
   MouseClick,
-  Key
+  Key,
+  RepeatAction
 } from './models'
 import { CancelCallback } from './macro-controller';
 
@@ -29,18 +30,61 @@ export class MacroExecutor {
     this.keyboardController = options.keyboardController
   }
 
-  public async run(script: Macro, cancelCallback?: CancelCallback) {
-    this.logger.info(`Running Script: ${script.name}`);
+  public async run(macro: Macro, cancelCallback?: CancelCallback) {
+    this.logger.info(`Running Script: ${macro.name}`);
+
+    if (this.isAlwaysRepeatingAction(macro.repeat)) {
+      await this.runAlways(macro, cancelCallback)
+    } else {
+      const repeatCount = this.getRepeatingActionCount(macro.repeat)
+      await this.runCounted(macro, repeatCount, cancelCallback)
+    }
+  }
+
+  private async runCounted(macro: Macro, repeatCount: number, cancelCallback?: CancelCallback) {
     let cancelProcessing = false
-    await script.actions.map(async (action) => {
-      if (cancelCallback) {
-        cancelProcessing = cancelCallback()
-      }
-      if (cancelProcessing) {
-        return
-      }
-      this.processAction(action)
-    });
+
+    for (let i = 0; i < repeatCount; i++) {
+      macro.actions.map(async (action) => {
+        if (cancelCallback) {
+          cancelProcessing = cancelCallback()
+        }
+        if (cancelProcessing) {
+          return
+        }
+        await this.processAction(action)
+      });
+    }
+  }
+
+  private async runAlways(macro: Macro, cancelCallback?: CancelCallback) {
+    let cancelProcessing = false
+    while(!cancelProcessing) {
+      macro.actions.map(async (action) => {
+        if (cancelCallback) {
+          cancelProcessing = cancelCallback()
+        }
+        if (cancelProcessing) {
+          return
+        }
+        await this.processAction(action)
+      });
+    }
+  }
+
+  private isAlwaysRepeatingAction(action: RepeatAction): boolean {
+    return action == 'always'
+  }
+
+  private getRepeatingActionCount(action: RepeatAction): number {
+    let repeatCount
+    try {
+      repeatCount = action as number
+    } catch {
+      this.logger.warn('Unable to retrieve repeat action count. Setting to single execution')
+      repeatCount = 1
+    }
+    return repeatCount
   }
 
   private async processAction<T extends Action = MouseAction | KeyboardAction>(action: T) {
