@@ -80,3 +80,6 @@ docs/build/
 
 # temporary stuff
 .tmp/
+
+# native build output
+build/
