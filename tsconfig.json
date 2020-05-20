@@ -10,7 +10,9 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "checkJs": false,
-    "rootDir": "src"
-  }
+    "checkJs": false
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
