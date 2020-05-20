@@ -70,4 +70,11 @@ export class MacroValidationHelper {
     return false
   }
 
+  public isActionDelayPresent(delay?: number): boolean {
+    if (delay && delay > 0 && delay < Number.MAX_SAFE_INTEGER) {
+      return true
+    }
+    return false
+  }
+
 }

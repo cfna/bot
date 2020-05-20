@@ -22,6 +22,8 @@ export interface Macro {
 
 export abstract class Action {
   type?: ActionType
+  delay_before?: number
+  delay_after?: number
 }
 
 export interface MouseAction extends Action {
