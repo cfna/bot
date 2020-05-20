@@ -10,6 +10,7 @@ import {
   MouseClick,
   Key
 } from './models'
+import { CancelCallback } from './macro-controller';
 
 export interface MacroExecutorOptions {
   mouseController: MouseController
@@ -28,21 +29,30 @@ export class MacroExecutor {
     this.keyboardController = options.keyboardController
   }
 
-  public async run(script: Macro) {
+  public async run(script: Macro, cancelCallback?: CancelCallback) {
     this.logger.info(`Running Script: ${script.name}`);
-    await script.actions.map(async (action) => this.processAction(action));
+    let cancelProcessing = false
+    await script.actions.map(async (action) => {
+      if (cancelCallback) {
+        cancelProcessing = cancelCallback()
+      }
+      if (cancelProcessing) {
+        return
+      }
+      this.processAction(action)
+    });
   }
 
   private async processAction<T extends Action = MouseAction | KeyboardAction>(action: T) {
     this.logger.info(`Processing Action:`);
     this.logger.info(JSON.stringify(action));
 
-    if(!action.type) {
+    if (!action.type) {
       this.logger.warn('Missing type identifier for Action. Skipping')
       return
     }
 
-    if(action.type === 'keyboard') {
+    if (action.type === 'keyboard') {
       this.logger.info('=> Keyboard Action found!');
       const keyboardAction = (action as unknown) as KeyboardAction;
       this.handleKeyboardAction(keyboardAction);
@@ -56,7 +66,7 @@ export class MacroExecutor {
   }
 
   private handleMouseAction(action: MouseAction) {
-    if(action.action === 'click' && action.location) {
+    if (action.action === 'click' && action.location) {
       this.handleMouseClick(action.location, action.button, action.click);
     } else if (action.action === 'move' && action.location) {
       this.handleMouseMove(action.location, action.smooth);
@@ -64,7 +74,7 @@ export class MacroExecutor {
   }
 
   private handleKeyboardAction(action: KeyboardAction) {
-    if(action.action === 'key' && action.key) {
+    if (action.action === 'key' && action.key) {
       this.handleKeyPress(action.key);
     } else if (action.action === 'text' && action.text) {
       this.handleTypeText(action.text)

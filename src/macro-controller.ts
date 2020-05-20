@@ -2,7 +2,11 @@ import { MouseController, KeyboardController } from './controllers'
 import { MacroExecutor, MacroExecutorOptions } from './macro-executor'
 import { Macro } from './models'
 
-export interface MacroExecutionOptions {}
+export type CancelCallback = () => boolean
+
+export interface MacroExecutionOptions {
+  cancelCallback?: CancelCallback
+}
 
 export class MacroController {
 
@@ -16,7 +20,7 @@ export class MacroController {
   // @ts-ignore
   public executeMacro(macro: Macro, options?: MacroExecutionOptions): Promise<void | undefined> {
     // TODO: add validation & proper options to customize macro execution
-    return this.macroExecutor.run(macro)
+    return this.macroExecutor.run(macro, options?.cancelCallback)
   }
 
   private buildMacroExecutorOptions(): MacroExecutorOptions {
