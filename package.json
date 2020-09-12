@@ -33,6 +33,7 @@
     "prerun:macro": "yarn build",
     "run:macro": "node bin/cli.js",
     "run:debug": "ts-node src/run.ts",
+    "run:record": "node bin/recorder.js",
     "prerelease": "yarn build",
     "release": "release-it"
   },
