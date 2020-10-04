@@ -17,3 +17,5 @@ release.config.json
 .lintstagedrc
 .huskyrc
 */.bin
+build/
+recordings/
