@@ -1,0 +1,27 @@
+name: mouse-move
+repeat: 3
+actions:
+- type: mouse
+  action: move
+  location:
+    x: 500
+    y: 600
+  smooth: true
+- type: mouse
+  action: move
+  location:
+    x: 300
+    y: 400
+  smooth: true
+- type: mouse
+  action: move
+  location:
+    x: 500
+    y: 600
+  smooth: true
+- type: mouse
+  action: move
+  location:
+    x: 300
+    y: 400
+  smooth: true
