@@ -2,7 +2,7 @@ tsconfig.json
 tslint.json
 src/
 __test__/
-jest.config.js
+jest.config.json
 typings.d.ts
 examples/
 tests/
@@ -16,3 +16,7 @@ tests/
 release.config.json
 .lintstagedrc
 .huskyrc
+*/.bin
+build/
+recordings/
+.github/
