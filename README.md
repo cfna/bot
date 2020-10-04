@@ -23,7 +23,7 @@ Build Requirements:
 - Node 14
 - Yarn
 
-*Note: In theory you should also be able to build this module on non Windows operating systems, but this is untested and won't be tested in the future as this project's target audience is Windows.*
+*Note:* This project is able to compile cross-platform, however it's mainly tested on Windows!
 
 To build the project run:
 
@@ -34,7 +34,14 @@ yarn build
 To build a native executable run:
 
 ```sh
-yarn build:native:v14 
+// Windows
+yarn build:native:win 
+
+// Mac
+yarn build:native:mac
+
+// Linux
+yarn build:native:linux
 ```
 
 ## Module Api
