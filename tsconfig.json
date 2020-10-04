@@ -10,7 +10,8 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "checkJs": false
+    "checkJs": false,
+    "skipLibCheck": true
   },
   "include": [
     "src/**/*"
