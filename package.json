@@ -1,7 +1,7 @@
 {
   "name": "@cfwest/macro-controller",
   "description": "An experimental macro interpretation module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "author": {
     "name": "Patrick Jung",
