@@ -1,6 +1,6 @@
 {
   "name": "@cfwest/macro-controller",
-  "description": "POC/DEV: A custom macro execution controller.",
+  "description": "An experimental macro interpretation module",
   "version": "0.0.1",
   "license": "MIT",
   "author": {
@@ -17,15 +17,17 @@
     "registry": "https://registry.npmjs.org/"
   },
   "bin": {
-    "cf-macro": "bin/cli.js"
+    "macro-controller": "bin/cli.js"
   },
   "scripts": {
     "prebuild": "yarn clean",
-    "prebuild:native:v12": "yarn build",
-    "prebuild:native:v14": "yarn build",
+    "prebuild:native:win": "yarn build",
+    "prebuild:native:mac": "yarn build",
+    "prebuild:native:linux": "yarn build",
     "build": "yarn compile",
-    "build:native:v12": "pkg . --target node12-win-x64 --out-path build",
-    "build:native:v14": "pkg . --target node14-win-x64 --out-path build",
+    "build:native:win": "pkg . --target node14-win-x64 --out-path build",
+    "build:native:mac": "pkg . --target node14-macos-x64 --out-path build",
+    "build:native:linux": "pkg . --target node14-linux-x64 --out-path build",
     "clean": "rimraf dist",
     "compile": "tsc",
     "pretest": "yarn build",
