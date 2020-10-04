@@ -19,3 +19,4 @@ release.config.json
 */.bin
 build/
 recordings/
+.github/
