@@ -1,5 +1,5 @@
 import { MouseController, KeyboardController } from './controllers'
-import { Logger, createLogger } from './utils'
+import { Logger, createLogger, delay } from './utils'
 import {
   Macro,
   Action,
@@ -112,7 +112,7 @@ export class MacroExecutor {
     this.logger.debug('-')
   }
 
-  private handleMouseAction(action: MouseAction) {
+  private async handleMouseAction(action: MouseAction) {
     const isValidLocation = this.macroValidationHelper.isValidLocation(action.location)
     const isValidMouseActionType = this.macroValidationHelper.isValidMouseActionType(action.action)
     
@@ -126,14 +126,25 @@ export class MacroExecutor {
       return
     }
 
+    const hasPreExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_before)
+    const hasPostExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_after)
+
+    if (hasPreExecutionDelay) {
+      await delay(action.delay_before!)
+    }
+
     if (action.action === 'click' && action.location) {
       this.handleMouseClick(action.location, action.button, action.click)
     } else if (action.action === 'move' && action.location) {
       this.handleMouseMove(action.location, action.smooth)
     }
+
+    if (hasPostExecutionDelay) {
+      await delay(action.delay_after!)
+    }
   }
 
-  private handleKeyboardAction(action: KeyboardAction) {
+  private async handleKeyboardAction(action: KeyboardAction) {
     const isValidKeyboardActionType = this.macroValidationHelper.isValidKeyboardActionType(action.action)
 
     if (!isValidKeyboardActionType) {
@@ -149,7 +160,19 @@ export class MacroExecutor {
         return
       }
 
-      this.handleKeyPress(action.key)
+      const hasPreExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_before)
+      const hasPostExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_after)
+
+      if (hasPreExecutionDelay) {
+        await delay(action.delay_before!)
+      }
+
+      await this.handleKeyPress(action.key)
+
+      if (hasPostExecutionDelay) {
+        await delay(action.delay_after!)
+      }
+
     } else if (action.action === 'text' && action.text) {
       const isValidText = this.macroValidationHelper.isValidText(action.text)
 
@@ -158,7 +181,19 @@ export class MacroExecutor {
         return
       }
 
-      this.handleTypeText(action.text)
+      const hasPreExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_before)
+      const hasPostExecutionDelay = this.macroValidationHelper.isActionDelayPresent(action.delay_after)
+
+      if (hasPreExecutionDelay) {
+        await delay(action.delay_before!)
+      }
+
+      await this.handleTypeText(action.text)
+
+      if (hasPostExecutionDelay) {
+        await delay(action.delay_after!)
+      }
+
     }
   }
 
